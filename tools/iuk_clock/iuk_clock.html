@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: black;
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .centered {
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                margin: 40px;
+            }
+
+            .footer {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            #clockTitle {
+                border: 3px solid blue;
+                font-size: 5vw;
+                padding: 10px;
+            }
+
+            #tacticalTime {
+                border: 3px solid red;
+                font-size: 10vw;
+                padding: 10px;
+            }
+
+            #clock {
+                border: 3px solid green;
+                font-size: 10vw;
+                padding: 10px;
+            }
+        </style>
+        <title>Taktische Zeit</title>
+    </head>
+    <body onload="startTime()">
+        <div class="centered" id="clockTitle">Taktische Zeit</div>
+        <div class="centered" id="tacticalTime"></div>
+        <div class="centered" id="clock"></div>
+
+        <div class="footer">
+            <p>iuk-clock v0.1</p>
+        </div>
+
+        <script>
+            const month = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+            function startTime() {
+                const time = new Date();
+                let y = time.getFullYear();
+                let M = time.getMonth() + 1;
+                let MText = month[time.getMonth()];
+                let d = time.getDate();
+                let h = time.getHours();
+                let m = time.getMinutes();
+                let s = time.getSeconds();
+
+                d = checkTime(d);
+                M = checkTime(M);
+                h = checkTime(h);
+                m = checkTime(m);
+                s = checkTime(s);
+                let Mtext = MText.toUpperCase();
+                y = y.toString().slice(-2);
+
+                document.getElementById('clock').innerHTML = d + "." + M + "." + y + " " + h + ":" + m + ":" + s;
+                document.getElementById('tacticalTime').innerHTML = d + " " + h + m + " " + Mtext + " " + y;
+                setTimeout(startTime, 1000);
+            }
+
+            function checkTime(i) {
+                if(i < 10 ) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        </script>
+    </body>
+</html>
