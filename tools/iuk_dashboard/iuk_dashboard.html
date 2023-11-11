@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<htm>
+    <head>
+        <title>openIuK - Dashboard</title>        
+        <meta http-equiv="refresh" content="15" >
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                color: white;
+                background-color: black;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .clock-column {
+                text-align: center;
+                flex: 50%;
+                padding: 10px;
+            }
+
+            .info-column {
+                flex: 35%;
+                height: 300px;
+                border: 1px solid blue;
+            }
+
+            .map-column {
+                flex: 65%;
+                height: 300px;
+                border: 1px solid blue;
+            }
+
+            .row {
+                display: flex;
+            }
+            
+            #tacticalTime {
+                border: 1px solid blue;
+                text-align: center;
+                font-size: 6vw;
+            }
+
+            #clock {
+                border: 1px solid blue;
+                text-align: center;
+                font-size: 6vw;
+            }
+        </style>
+    </head>
+    <body onload="initialize()">
+        <div class="row">            
+            <div class="clock-column" id="tacticalTime">
+            </div>
+            <div class="clock-column" id="clock">
+            </div>
+        </div>
+        <div class="row">     
+            <div class="info-column" id="info">
+            </div>
+            <div class="map-column" id="map">
+            </div>
+        </div>
+    </body>
+
+    <script>
+        function initialize() {
+            startTime();
+        }
+
+        const month = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        function startTime() {
+            const time = new Date();
+            let y = time.getFullYear();
+            let M = time.getMonth() + 1;
+            let MText = month[time.getMonth()];
+            let d = time.getDate();
+            let h = time.getHours();
+            let m = time.getMinutes();
+            let s = time.getSeconds();
+
+            d = checkTime(d);
+            M = checkTime(M);
+            h = checkTime(h);
+            m = checkTime(m);
+            s = checkTime(s);
+            let Mtext = MText.toUpperCase();
+            y = y.toString().slice(-2);
+
+            document.getElementById('clock').innerHTML = d + "." + M + "." + y + " " + h + ":" + m + ":" + s;
+            document.getElementById('tacticalTime').innerHTML = d + " " + h + m + " " + Mtext + " " + y;
+            setTimeout(startTime, 1000);
+        }
+
+        function checkTime(i) {
+            if(i < 10 ) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+</htm>
